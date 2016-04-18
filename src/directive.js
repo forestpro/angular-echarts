@@ -158,7 +158,9 @@ function getLinkFunction($http, theme, util, type) {
                             chart.clear();
                         }
                         if (options.series.length) {
-                            chart.setOption(options);
+                          
+                            chart.hideLoading();
+                            chart.setOption(options,true);
                             chart.resize();
                         } else {
                             chart.showLoading({ text: scope.config.errorMsg || '没有数据', textStyle: textStyle });
@@ -179,7 +181,8 @@ function getLinkFunction($http, theme, util, type) {
                     chart.clear();
                 }
                 if (options.series.length) {
-                    chart.setOption(options);
+                    chart.hideLoading();
+                    chart.setOption(options,true);
                     chart.resize();
                 } else {
                     chart.showLoading({ text: scope.config.errorMsg || '没有数据', textStyle: textStyle });
@@ -209,7 +212,7 @@ for (var i = 0, n = types.length; i < n; i++) {
         app.directive(type + 'Chart', ['$http', 'theme', 'util', function ($http, theme, util) {
             return {
                 restrict: 'EA',
-                template: '<div></div>',
+                template: '<div id="chart-angluar"></div>',
                 scope: {
                     config: '=config',
                     data: '=data'

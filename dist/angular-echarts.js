@@ -135,7 +135,9 @@ function getLinkFunction($http, theme, util, type) {
                             chart.clear();
                         }
                         if (options.series.length) {
-                            chart.setOption(options);
+                            console.log('set optinon........');
+                            chart.hideLoading();
+                            chart.setOption(options, true);
                             chart.resize();
                         } else {
                             chart.showLoading({
@@ -162,7 +164,9 @@ function getLinkFunction($http, theme, util, type) {
                     chart.clear();
                 }
                 if (options.series.length) {
-                    chart.setOption(options);
+                    console.log('set optinon........');
+                    chart.hideLoading();
+                    chart.setOption(options, true);
                     chart.resize();
                 } else {
                     chart.showLoading({
@@ -199,7 +203,7 @@ for (var i = 0, n = types.length; i < n; i++) {
         app.directive(type + 'Chart', ['$http', 'theme', 'util', function ($http, theme, util) {
                     return {
                         restrict: 'EA',
-                        template: '<div></div>',
+                        template: '<div id="chart-angluar"></div>',
                         scope: {
                             config: '=config',
                             data: '=data'
@@ -369,8 +373,8 @@ angular.module('angular-echarts.util', []).factory('util', function () {
                             normal: {
                                 label: {
                                     position: 'inner',
-                                    formatter: function (a, b, c, d) {
-                                        return (d - 0).toFixed(0) + '%';
+                                    formatter: function (item) {
+                                        return (+item.percent).toFixed() + '%';
                                     }
                                 },
                                 labelLine: { show: false }
